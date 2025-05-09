@@ -1,0 +1,8 @@
+INSERT INTO `ex_type` (ex_type_name) VALUES
+('Strength'),
+('Plyometrics'),
+('Cardio'),
+('Stretching'),
+('Powerlifting'),
+('Strongman'),
+('Olympic Weightlifting');

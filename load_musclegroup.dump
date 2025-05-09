@@ -1,0 +1,18 @@
+INSERT INTO `muscle_group` (muscle_group_name,upper) VALUES
+( 'Abdominals',1),
+( 'Adductors',0),
+( 'Abductors',0),
+( 'Biceps',1),
+( 'Calves',0),
+( 'Chest',1),
+( 'Forearms',1),
+( 'Glutes',0),
+( 'Hamstrings',0),
+( 'Lats',1),
+('Lumbar',1),
+('middle back', 1),
+('traps',1),
+('neck',1),
+('quadriceps',0),
+('shoulders',1),
+('triceps',1)
