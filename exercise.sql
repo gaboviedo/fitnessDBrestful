@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS exercise,
                      muscle_group,
                      ex_type,
                      weight,
-                     preference,
+                     lesson,
                      user;
 
 
@@ -20,12 +20,6 @@ CREATE TABLE muscle_group (
     upper       boolean         NOT NULL
 )AUTO_INCREMENT = 1;
 
-CREATE table preference(
-    preference_no int primary key AUTO_INCREMENT,
-    ex_type_no int,
-    body_only boolean,
-    level char(25)
-);
 
 CREATE table weight(
     weight_no int primary key AUTO_INCREMENT,
@@ -50,18 +44,27 @@ CREATE TABLE exercise (
     rating_desc     char(25)
 );
 
+CREATE table lesson(
+    lesson_no int AUTO_INCREMENT,
+    ex_type_no int,
+    muscle_group_no,
+    body_only boolean,
+    primary key (lesson_no)
+)
 
-
-
+-- preference is an ex_type_no
+-- body_only should be joined from exercise.equipment
+-- level should be joined from exercise.level
 CREATE TABLE user (
     user_no      int  AUTO_INCREMENT,
     user_name   VARCHAR(25)     NOT NULL,
-    preference_no int,
    lessons_completed     INT         ,
    weight int,
    from_date    DATE            NOT NULL,
    primary key (user_no)
    )AUTO_INCREMENT=1;
+
+
 
 SELECT 'LOADING exercise' as 'INFO';
 source load_exercise.dump ;
@@ -76,3 +79,4 @@ source load_weight.dump;
 
 select * from user where user.user_name = 'user0';
 SELECT weight_pounds,date_taken,user_name,user.user_no from weight join (user) on user.user_no = weight.user_no;
+select level distinct from exercise;

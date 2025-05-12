@@ -23,7 +23,7 @@ def login(username):
 @app.route('/create/',methods = ['POST',])
 def createUser():
     userinfo = request.args.getlist('user_name')
-    userinfo = request.args.getlist('preference_no')
+    userinfo = request.args.getlist('preference')
     
     print(userinfo)
     #out = insertUser(un,pn,ln,w)
@@ -48,9 +48,9 @@ def findUser(user_name):
                 (user_name,))
     
     return [i for i in cur]
-def insertUser(user_name,preference_no,lessons_completed,weight):
-    cur.execute("insert into user (user_name,preference_no,lessons_completed,weight,from_date) values (?,?,?,?,current_date)  ",
-            (user_name,preference_no,lessons_completed,weight) )
+def insertUser(user_name,weight):
+    cur.execute("insert into user (user_name,lessons_completed,weight,from_date) values (?,?,?,0,?,current_date)  ",
+            (user_name,weight) )
 def insertExercise(ex_title,ex_desc,ex_type,muscle_group,equipment,rating,rating_desc):
     cur.execute("insert into exercise (ex_title,ex_desc,ex_type,muscle_group,equipment,rating,rating_desc) values (?,?,?,?,?,?,?) ",
                 (ex_title,ex_desc,ex_type,muscle_group,equipment,rating,rating_desc))
@@ -58,17 +58,22 @@ def insertExercise(ex_title,ex_desc,ex_type,muscle_group,equipment,rating,rating
 def insertWeight(user_no,weight_pounds,date_taken):
     cur.execute("INSERT INTO weight  (user_no,weight_pounds,date_taken) VALUES (?,?,?) ",
                 (user_no,weight_pounds,date_taken))
-def insertPref(ex_type_no, body_only,level):
-    cur.execute("insert into preference (ex_type_no, body_only,level) values (?,?,?) ",
-                (ex_type_no, body_only,level))
+
 def deleteUSer(user_no):
     cur.execute("delete from user where user.user_no =? ",
                 (user_no))
 def deleteExercise(ex_no):
     cur.execute("delete from exercise where exercise.ex_no =? ",
                 (ex_no))
-def showPref():
-    cur.execute("show columns from preference ")
+def showMuscle():
+    cur.execute("show columns from muscle_group ")
+def showExTypes():
+    cur.execute("show columns from ex_type")
+def showLevels():
+    cur.execute("select level distinct from exercise")
+def showEquip():
+    cur.execute("select * ex_type_name from ex_type ")
+
 
 
 if __name__ == "__main__":
